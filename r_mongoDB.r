@@ -1,20 +1,20 @@
 # install package to connect through monodb
-install.packages(“rmongodb”)
+install.packages("rmongodb")
 library(rmongodb)
 # connect to MongoDB
-mongo = mongo.create(host = “localhost”)
+mongo = mongo.create(host = "localhost")
 mongo.is.connected(mongo)
 
 mongo.get.databases(mongo)
 
-mongo.get.database.collections(mongo, db = “tweetDB2″) #”tweetDB” is where twitter data is stored
+mongo.get.database.collections(mongo, db = "tweetDB2") #”tweetDB” is where twitter data is stored
 
 library(plyr)
 ## create the empty data frame
 df1 = data.frame(stringsAsFactors = FALSE)
 
 ## create the namespace
-DBNS = “tweetDB2.#analytic”
+DBNS = "tweetDB2.#analytic"
 
 ## create the cursor we will iterate over, basically a select * in SQL
 cursor = mongo.find(mongo, DBNS)
