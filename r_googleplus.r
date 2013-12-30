@@ -4,7 +4,8 @@ api_key<-"XXX"
 
 user_id <- "105616015219357887822"
 # Still need to add ssl.verifypeer = FALSE to get a connection :(
-data <- getURL(paste("https://www.googleapis.com/plus/v1/people/",user_id,"/activities/public?key=", api_key, sep=""),ssl.verifypeer = FALSE)
+# Add a max results parameter in the URL structure to get 100 results (maximum allowed by the API : https://developers.google.com/+/api/)
+data <- getURL(paste("https://www.googleapis.com/plus/v1/people/",user_id,"/activities/public?maxResults=100&key=", api_key, sep=""),ssl.verifypeer = FALSE)
 js <- fromJSON(data, asText=TRUE);
 
 df = data.frame(no = 1:length(js$items))
