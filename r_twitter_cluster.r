@@ -31,9 +31,6 @@ plot(1:15, wss, type="b", xlab="Number of Clusters",
 
 ###k-means
 
-##Create a object containing the vectors to be used in the K-Means
-
-
 ##Run the K Means algorithm, specifying 2 centers
 user2Means.log <- kmeans(kObject.log, centers=6, iter.max=10, nstart=100)
 
