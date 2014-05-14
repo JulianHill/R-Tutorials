@@ -1,5 +1,5 @@
 require(rCharts)
-
+require(twitteR)
 
 user <- getUser("JulianHi")
 userFriends <- user$getFriends()
