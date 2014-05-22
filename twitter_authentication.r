@@ -5,20 +5,19 @@
 
 require(twitteR)
  
+library(RCurl)
+# Set SSL certs globally
+options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
+ 
+
 reqURL <- "https://api.twitter.com/oauth/request_token"
+accessURL <- "https://api.twitter.com/oauth/access_token"
+authURL <- "https://api.twitter.com/oauth/authorize"
+apiKey <- "yourAPIkey"
+apiSecret <- "yourAPIsecret"
  
-accessURL <- "http://api.twitter.com/oauth/access_token"
+twitCred <- OAuthFactory$new(consumerKey=apiKey,consumerSecret=apiSecret,requestURL=reqURL,accessURL=accessURL,authURL=authURL)
  
-authURL <- "http://api.twitter.com/oauth/authorize"
- 
-consumerKey <- "CONSUMER_KEY"
- 
-consumerSecret <- "CONSUMER_SECRET"
- 
-twitCred <- OAuthFactory$new(consumerKey=consumerKey,consumerSecret=consumerSecret,requestURL=reqURL,accessURL=accessURL,authURL=authURL)
- 
-download.file(url="http://curl.haxx.se/ca/cacert.pem", destfile="cacert.pem")
- 
-twitCred$handshake(cainfo="cacert.pem")
+twitCred$handshake(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))
  
 registerTwitterOAuth(twitCred)
