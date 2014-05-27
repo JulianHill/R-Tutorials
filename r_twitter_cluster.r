@@ -52,8 +52,8 @@ userNeighbors.df$cluster <- kObject.log$cluster
 
 
 p2 <- nPlot(logFollowersCount ~ logFriendsCount, group = 'cluster', data = userNeighbors.df, type = 'scatterChart')
-p2$xAxis(axisLabel = 'Cuenta de seguidores')
-p2$yAxis(axisLabel = 'Cuenta de amigos')
+p2$xAxis(axisLabel = 'Followers Count')
+p2$yAxis(axisLabel = 'Friends Count')
 p2$chart(tooltipContent = "#! function(key, x, y, e){
 				return e.point.screenName + ' Followers: ' + e.point.followersCount +' Friends: ' + e.point.friendsCount
 				} !#")
