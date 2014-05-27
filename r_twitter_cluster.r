@@ -4,7 +4,7 @@
 # install_github("twitteR", username="geoffjentry")
 # install_github('rCharts','ramnathv')
 
-setwd("/Users/pacha/Dropbox/R/analisis de cluster")
+
 
 library(RCurl)
 # Set SSL certs globally
@@ -12,7 +12,8 @@ options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", packag
 
 library(twitteR)
 
-setup_twitter_oauth("CONSUMERKEY", "CONSUMERSECRET", "ACCESSTOKEN", "ACCESSTOKENSECRET")
+#Authentication
+#http://thinktostart.wordpress.com/2013/05/22/twitter-authentification-with-r/
 
 
 library(rCharts)
