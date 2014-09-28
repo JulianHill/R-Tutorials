@@ -13,7 +13,8 @@ require(Rfacebook)
     #Extract the post ids
     posts <- page$id
   
-      
+    
+    data_frame_gender <- data.frame(post=character(),male=numeric(),female=numeric(),etc=numeric(),likes=numeric(),type=character(),stringsAsFactors=FALSE)
    #process each post and analyze the gender distribution of the likes 
     for(i in 1:length(posts))
     {
@@ -49,4 +50,15 @@ require(Rfacebook)
       data_frame_gender[i,4] <- number_etc
       
     }
+
+
+    slices <- c(sum(data_frame_gender$male),sum(data_frame_gender$female),sum(data_frame_gender$etc))
+   
+pct <- round(slices/sum(slices)*100)
+    lbls <- names(data_frame_gender[2:4])
+    lbls <- paste(lbls, pct) # add percents to labels
+    lbls <- paste(lbls,"%",sep="") # ad % to labels
+   
+    pie(slices, labels = lbls, main="Gender Distribution of all analyzed posts")
+
     
