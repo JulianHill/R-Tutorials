@@ -18,8 +18,8 @@ full_url <- gsub("(.*localhost:[0-9]{1,5}/).*", x=full_url, replacement="\\1")
 invisible(readline(message))
 
 app_name <- "ThinkToStartTest"
-client_id <- "7d6f1b8df18f41349ac5ef4be32d1789"
-client_secret <- "e0eea8134949438199e102760286efc7"
+client_id <- "XXX"
+client_secret <- "XXX"
 scope = "basic"
 
 
