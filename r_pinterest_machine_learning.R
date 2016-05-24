@@ -52,7 +52,7 @@ fb_ep = oauth_endpoint(token_url, auth_url, access_url)
 pi_oauth <- oauth1.0_token(pinterest, myapp)
 
 
-754c073e2078e098
+
 
 tmp <- strsplit(toString(names(ig_oauth$credentials)), '"')
 token <- tmp[[1]][4]
