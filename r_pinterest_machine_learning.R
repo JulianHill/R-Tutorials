@@ -1,6 +1,6 @@
 # Pinterest
 
-#Analyze Instagram with R
+#Analyze Pinterest with R
 #Author: Julian Hillebrand
 
 #packages
@@ -19,11 +19,11 @@ full_url <- gsub("(.*localhost:[0-9]{1,5}/).*", x=full_url, replacement="\\1")
 
 invisible(readline(message))
 
-app_name <- "ThinkToStartTest"
+app_name <- "R Test"
 client_id <- "XXX"
 client_secret <- "XXX"
-scope = "basic"
-
+scope = "read_public"
+redirect_uri="https://mywebsite.com/connect/pinterest/"
 
 https://api.pinterest.com/oauth/?
 response_type=code&
@@ -32,17 +32,28 @@ response_type=code&
   scope=read_public,write_public&
   state=768uyFys
 
+user_info <- fromJSON(getURL(paste("https://api.pinterest.com/oauth?response_type=code&client_id=",client_id,"&scope=",scope,sep="")),unexpected.escape ="keep")
 
+paste("https://api.pinterest.com/oauth?response_type=code&client_id=",client_id,"&scope=",scope,sep="")
 
+pinterest <- oauth_endpoint(
+  authorize = "https://api.pinterest.com/oauth",
+  access = "https://api.pinterest.com/v1/oauth/token")  
 
-
-instagram <- oauth_endpoint(
-  authorize = "https://api.instagram.com/oauth/authorize",
-  access = "https://api.instagram.com/oauth/access_token")  
 myapp <- oauth_app(app_name, client_id, client_secret)
 
+
+
 #scope <- NULL
-ig_oauth <- oauth2.0_token(instagram, myapp,scope="basic",  type = "application/x-www-form-urlencoded",cache=FALSE)  
+pi_oauth <- oauth2.0_token(pinterest, myapp,scope=scope,use_oob = TRUE, as_header = TRUE)
+
+
+fb_ep = oauth_endpoint(token_url, auth_url, access_url)
+pi_oauth <- oauth1.0_token(pinterest, myapp)
+
+
+754c073e2078e098
+
 tmp <- strsplit(toString(names(ig_oauth$credentials)), '"')
 token <- tmp[[1]][4]
 
