@@ -1,23 +1,31 @@
 # https://dev.twitter.com/ 
 
+# Install the newest version of the twitteR package from GitHub
+install.packages(c("devtools", "rjson", "bit64", "httr"))
 
+#RESTART R session!
+
+library(devtools)
+install_github("twitteR", username="geoffjentry")
+library(twitteR)
 
 
 require(twitteR)
  
-library(RCurl)
+
+#library(RCurl)
 # Set SSL certs globally
-options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
+#options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
  
 
 reqURL <- "https://api.twitter.com/oauth/request_token"
 accessURL <- "https://api.twitter.com/oauth/access_token"
 authURL <- "https://api.twitter.com/oauth/authorize"
-apiKey <- "yourAPIkey"
-apiSecret <- "yourAPIsecret"
- 
-twitCred <- OAuthFactory$new(consumerKey=apiKey,consumerSecret=apiSecret,requestURL=reqURL,accessURL=accessURL,authURL=authURL)
- 
-twitCred$handshake(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl"))
- 
-registerTwitterOAuth(twitCred)
+#apiKey <- "yourAPIkey"
+#apiSecret <- "yourAPIsecret"
+
+
+
+setup_twitter_oauth(apiKey, apiSecret)
+
+
