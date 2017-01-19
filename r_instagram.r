@@ -18,9 +18,9 @@ full_url <- gsub("(.*localhost:[0-9]{1,5}/).*", x=full_url, replacement="\\1")
 invisible(readline(message))
 
 app_name <- "ThinkToStartTest"
-client_id <- "XXX"
-client_secret <- "XXX"
-scope = "basic"
+client_id <- "CLIENT_ID"
+client_secret <- "CLIENT_SECRET"
+scope = "public_content"
 
 
 
@@ -30,24 +30,26 @@ instagram <- oauth_endpoint(
 myapp <- oauth_app(app_name, client_id, client_secret)
 
 #scope <- NULL
-ig_oauth <- oauth2.0_token(instagram, myapp,scope="basic",  type = "application/x-www-form-urlencoded",cache=FALSE)  
+ig_oauth <- oauth2.0_token(instagram, myapp,scope=scope,  type = "application/x-www-form-urlencoded",cache=FALSE)  
 tmp <- strsplit(toString(names(ig_oauth$credentials)), '"')
-token <- tmp[[1]][4]
+token <- tmp[[1]][30]
 
 ########################################################
 
-username <- "therock"
 
-#search for the username
-user_info <- fromJSON(getURL(paste('https://api.instagram.com/v1/users/search?q=',username,'&access_token=',token,sep="")),unexpected.escape = "keep")
+user_info <- fromJSON(getURL(paste('https://api.instagram.com/v1/users/self/?access_token=',token,sep="")))
 
-received_profile <- user_info$data[[1]]
 
-if(grepl(received_profile$username,username))
-{
-  user_id <- received_profile$id
+
+received_profile <- user_info$data$id
+
+
+
+
+
   #Get recent media (20 pictures)
-  media <- fromJSON(getURL(paste('https://api.instagram.com/v1/users/',user_id,'/media/recent/?access_token=',token,sep="")))
+  media <- fromJSON(getURL(paste('https://api.instagram.com/v1/users/self/media/recent/?access_token=',token,sep="")))
+  
   
   
   df = data.frame(no = 1:length(media$data))
@@ -70,8 +72,4 @@ if(grepl(received_profile$username,username))
   
   m1 <- mPlot(x = "date", y = c("likes", "comments"), type = "Line", data = df)
   
-  
-}else
-{
-  print("Error: User not found!")
-}
+ 
