@@ -9,6 +9,10 @@ names <- read.csv("names.csv",header=FALSE,sep=";")
 #Set the names of the dataset dataframe:
 names(dataset) <- sapply((1:nrow(names)),function(i) toString(names[i,1]))
 
+#Or there will be a "not a valid R variable name" error 
+dataset$y[dataset$y == 1] = "yes"
+dataset$y[dataset$y == 0] = "no"
+ 
 #make column y a factor variable for binary classification (spam or non-spam)
 dataset$y <- as.factor(dataset$y)
 
@@ -19,6 +23,7 @@ sample <- dataset[sample(nrow(dataset), 1000),]
 
 #Set up the packages:
 
+#require(e1071) #better installed before sourcing
 #install.packages(“caret”)
  
 require(caret)
@@ -29,7 +34,7 @@ require(kernlab)
  
 #install.packages(“doMC”)
  
-require(doMC)
+#require(doMC) #It is not valid from CRAN for R 3.3.2 Windows, but you may install it manually.
 
 
 #Split the data in dataTrain and dataTest
@@ -38,7 +43,7 @@ dataTrain <- sample[ trainIndex,]
 dataTest  <- sample[-trainIndex,]
 
 #set up multicore environment
-registerDoMC(cores=5)
+#registerDoMC(cores=5)
 
 
 #Create the SVM model:
