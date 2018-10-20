@@ -9,7 +9,7 @@ library(devtools)
 install_github("twitteR", username="geoffjentry")
 library(twitteR)
 
-
+# find your data
 require(twitteR)
  
 
@@ -24,6 +24,7 @@ authURL <- "https://api.twitter.com/oauth/authorize"
 apiKey <- "yourAPIkey"
 apiSecret <- "yourAPIsecret"
 
+# more about https://developer.twitter.com/en.html
 
 
 setup_twitter_oauth(apiKey, apiSecret)
